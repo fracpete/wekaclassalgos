@@ -46,6 +46,11 @@ Click on one of the following links to download the corresponding Weka package:
 * [2017.10.18](https://github.com/fracpete/wekaclassalgos/releases/download/v2017.10.18/wekaclassalgos-2017.10.18.zip)
 
 
+**NB:** You need to install the *normalize* package (>=1.0.1) first before 
+installing this unofficial package. Otherwise the package manager will report
+an error.
+
+
 How to use packages
 -------------------
 
