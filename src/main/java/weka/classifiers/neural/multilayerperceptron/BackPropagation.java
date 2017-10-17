@@ -15,7 +15,6 @@
 
 package weka.classifiers.neural.multilayerperceptron;
 
-import weka.classifiers.Evaluation;
 import weka.classifiers.neural.common.NeuralModel;
 import weka.classifiers.neural.common.SimpleNeuron;
 import weka.classifiers.neural.common.WekaAlgorithmAncestor;
@@ -394,11 +393,6 @@ public class BackPropagation extends WekaAlgorithmAncestor {
    * @param args
    */
   public static void main(String[] args) {
-    try {
-      System.out.println(Evaluation.evaluateModel(new BackPropagation(), args));
-    }
-    catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+    runClassifier(new BackPropagation(), args);
   }
 }

@@ -15,7 +15,6 @@
 
 package weka.classifiers.neural.lvq;
 
-import weka.classifiers.Evaluation;
 import weka.classifiers.neural.common.learning.LearningKernelFactory;
 import weka.classifiers.neural.common.learning.LearningRateKernel;
 import weka.classifiers.neural.lvq.algorithm.Olvq1Algorithm;
@@ -95,11 +94,6 @@ public class Olvq1 extends LvqAlgorithmAncestor {
    * @param args
    */
   public static void main(String[] args) {
-    try {
-      System.out.println(Evaluation.evaluateModel(new Olvq1(), args));
-    }
-    catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+    runClassifier(new Olvq1(), args);
   }
 }

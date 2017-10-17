@@ -15,7 +15,6 @@
 
 package weka.classifiers.neural.singlelayerperceptron;
 
-import weka.classifiers.Evaluation;
 import weka.classifiers.neural.common.NeuralModel;
 import weka.classifiers.neural.common.SimpleNeuron;
 import weka.classifiers.neural.common.learning.LearningKernelFactory;
@@ -75,11 +74,6 @@ public class WidrowHoff extends Perceptron {
    * @param args
    */
   public static void main(String[] args) {
-    try {
-      System.out.println(Evaluation.evaluateModel(new WidrowHoff(), args));
-    }
-    catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+    runClassifier(new WidrowHoff(), args);
   }
 }

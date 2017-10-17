@@ -17,7 +17,6 @@ package weka.classifiers.neural.lvq;
 
 import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
-import weka.classifiers.Evaluation;
 import weka.classifiers.neural.lvq.model.CommonModel;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -311,11 +310,6 @@ public class MultipassLvq extends AbstractClassifier
 
 
   public static void main(String[] args) {
-    try {
-      System.out.println(Evaluation.evaluateModel(new MultipassLvq(), args));
-    }
-    catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+   runClassifier(new MultipassLvq(), args);
   }
 }

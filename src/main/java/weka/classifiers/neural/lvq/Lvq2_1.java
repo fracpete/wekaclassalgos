@@ -15,7 +15,6 @@
 
 package weka.classifiers.neural.lvq;
 
-import weka.classifiers.Evaluation;
 import weka.classifiers.neural.common.Constants;
 import weka.classifiers.neural.common.learning.LearningKernelFactory;
 import weka.classifiers.neural.common.learning.LearningRateKernel;
@@ -160,11 +159,6 @@ public class Lvq2_1 extends LvqAlgorithmAncestor {
    * @param args
    */
   public static void main(String[] args) {
-    try {
-      System.out.println(Evaluation.evaluateModel(new Lvq2_1(), args));
-    }
-    catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+    runClassifier(new Lvq2_1(), args);
   }
 }

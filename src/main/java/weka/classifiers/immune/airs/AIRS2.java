@@ -20,7 +20,6 @@
 package weka.classifiers.immune.airs;
 
 import weka.classifiers.AbstractClassifier;
-import weka.classifiers.Evaluation;
 import weka.classifiers.immune.airs.algorithm.AIRS2Trainer;
 import weka.classifiers.immune.airs.algorithm.AISModelClassifier;
 import weka.core.Capabilities;
@@ -459,13 +458,7 @@ public class AIRS2 extends AbstractClassifier
   }
 
 
-  public static void main(String[] argv) {
-
-    try {
-      System.out.println(Evaluation.evaluateModel(new AIRS2(), argv));
-    }
-    catch (Exception e) {
-      System.err.println(e.getMessage());
-    }
+  public static void main(String[] args) {
+   runClassifier(new AIRS2(), args);
   }
 }

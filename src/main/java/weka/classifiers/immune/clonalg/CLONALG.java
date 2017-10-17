@@ -380,13 +380,7 @@ public class CLONALG extends AbstractClassifier {
     this.totalReplacement = totalReplacement;
   }
 
-  public static void main(String[] argv) {
-
-    try {
-      System.out.println(Evaluation.evaluateModel(new CLONALG(), argv));
-    }
-    catch (Exception e) {
-      System.err.println(e.getMessage());
-    }
+  public static void main(String[] args) {
+   runClassifier(new CLONALG(), args);
   }
 }

@@ -780,11 +780,6 @@ public class HierarchalLvq extends AbstractClassifier
    * @param args
    */
   public static void main(String[] args) {
-    try {
-      System.out.println(Evaluation.evaluateModel(new HierarchalLvq(), args));
-    }
-    catch (Exception e) {
-      System.out.println(e.getMessage());
-    }
+   runClassifier(new HierarchalLvq(), args);
   }
 }

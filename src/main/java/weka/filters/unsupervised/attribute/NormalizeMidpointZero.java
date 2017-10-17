@@ -19,7 +19,6 @@ import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.SparseInstance;
-import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.UnsupervisedFilter;
 
@@ -246,22 +245,10 @@ public class NormalizeMidpointZero extends Filter
   /**
    * Main method for testing this class.
    *
-   * @param argv should contain arguments to the filter:
+   * @param args should contain arguments to the filter:
    *             use -h for help
    */
-  public static void main(String[] argv) {
-
-    try {
-      if (Utils.getFlag('b', argv)) {
-	Filter.batchFilterFile(new NormalizeMidpointZero(), argv);
-      }
-      else {
-	Filter.filterFile(new NormalizeMidpointZero(), argv);
-      }
-    }
-    catch (Exception ex) {
-      System.out.println(ex.getMessage());
-    }
+  public static void main(String[] args) {
+    runFilter(new NormalizeMidpointZero(), args);
   }
-
 }

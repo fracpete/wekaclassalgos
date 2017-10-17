@@ -16,7 +16,6 @@
 package weka.classifiers.immune.clonalg;
 
 import weka.classifiers.AbstractClassifier;
-import weka.classifiers.Evaluation;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
@@ -378,13 +377,7 @@ public class CSCA extends AbstractClassifier {
     this.totalGenerations = totalGenerations;
   }
 
-  public static void main(String[] argv) {
-
-    try {
-      System.out.println(Evaluation.evaluateModel(new CSCA(), argv));
-    }
-    catch (Exception e) {
-      System.err.println(e.getMessage());
-    }
+  public static void main(String[] args) {
+   runClassifier(new CSCA(), args);
   }
 }

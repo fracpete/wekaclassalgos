@@ -16,7 +16,6 @@
 package weka.classifiers.immune.immunos;
 
 import weka.classifiers.AbstractClassifier;
-import weka.classifiers.Evaluation;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
@@ -312,14 +311,8 @@ public class Immunos99 extends AbstractClassifier {
     this.totalGenerations = totalGenerations;
   }
 
-  public static void main(String[] argv) {
-
-    try {
-      System.out.println(Evaluation.evaluateModel(new Immunos99(), argv));
-    }
-    catch (Exception e) {
-      System.err.println(e.getMessage());
-    }
+  public static void main(String[] args) {
+   runClassifier(new Immunos99(), args);
   }
 
   /**
