@@ -11,10 +11,6 @@
   <name>wekaclassalgos</name>
   <description>Fork of the following defunct sourceforge.net project: https://sourceforge.net/projects/wekaclassalgos/</description>
   <url>https://github.com/fracpete/wekaclassalgos</url>
-  <organization>
-    <name>University of Waikato, Hamilton, NZ</name>
-    <url>http://www.waikato.ac.nz/</url>
-  </organization>
   <licenses>
     <license>
       <name>GNU General Public License 3</name>
