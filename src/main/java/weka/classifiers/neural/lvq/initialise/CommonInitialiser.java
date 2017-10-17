@@ -45,7 +45,7 @@ public abstract class CommonInitialiser implements ModelInitialiser
 		// repace any missing values
 		for (int j = 0; j < attributes.length; j++)
 		{
-			if(Instance.isMissingValue(attributes[j]))
+			if(weka.core.Utils.isMissingValue(attributes[j]))
 			{
 				// replace with a random double - shown to produce better results
 				// because it assumes nothing about the data					

@@ -1,7 +1,6 @@
 package weka.classifiers.neural.lvq.vectordistance;
 
 import weka.core.Attribute;
-import weka.core.Instance;
 import weka.core.Instances;
 
 /**
@@ -83,7 +82,7 @@ public class DistanceFactory
         for(int i=0; i<distances.length && result < aBestValue; i++)
         {
 			// never compare a missing value to a valid value
-			if(!Instance.isMissingValue(instance[i]))
+			if(!weka.core.Utils.isMissingValue(instance[i]))
 			{
 				result += distances[i].distance(instance[i], vector[i]);
 			}

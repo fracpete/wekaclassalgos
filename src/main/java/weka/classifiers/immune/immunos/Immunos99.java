@@ -1,10 +1,6 @@
 package weka.classifiers.immune.immunos;
 
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Vector;
-
-import weka.classifiers.Classifier;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -15,6 +11,10 @@ import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.instance.Normalize;
 
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.Vector;
+
 /**
  * Type: Immunos99 <br>
  * Date: 19/01/2005 <br>
@@ -24,7 +24,7 @@ import weka.filters.unsupervised.instance.Normalize;
  * 
  * @author Jason Brownlee
  */
-public class Immunos99 extends Classifier implements OptionHandler
+public class Immunos99 extends AbstractClassifier
 {
 	// user paramters
 	protected int totalGenerations; // G

@@ -1,11 +1,6 @@
 package weka.classifiers.neural.common;
 
-import java.util.Collection;
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Vector;
-
-import weka.classifiers.Classifier;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.neural.common.learning.LearningKernelFactory;
 import weka.classifiers.neural.common.training.NeuralTrainer;
 import weka.classifiers.neural.common.training.TrainerFactory;
@@ -13,9 +8,13 @@ import weka.classifiers.neural.common.transfer.TransferFunctionFactory;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.OptionHandler;
 import weka.core.UnsupportedClassTypeException;
 import weka.core.WeightedInstancesHandler;
+
+import java.util.Collection;
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * <p>Title: Weka Neural Implementation</p>
@@ -26,8 +25,8 @@ import weka.core.WeightedInstancesHandler;
  * @version 1.0
  */
 
-public abstract class WekaAlgorithmAncestor extends Classifier
-    implements OptionHandler, WeightedInstancesHandler
+public abstract class WekaAlgorithmAncestor extends AbstractClassifier
+    implements WeightedInstancesHandler
 {
     private final static int PARAM_TRAINING_ITERATIONS    = 0;
     private final static int PARAM_LEARNING_RATE          = 1;

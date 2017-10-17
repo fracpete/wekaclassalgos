@@ -4,21 +4,20 @@
  */
 package weka.classifiers.immune.airs;
 
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Random;
-import java.util.Vector;
-
-import weka.classifiers.Classifier;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.immune.airs.algorithm.AIRS2Trainer;
 import weka.classifiers.immune.airs.algorithm.AISModelClassifier;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.OptionHandler;
 import weka.core.UnsupportedClassTypeException;
 import weka.core.Utils;
+
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.Random;
+import java.util.Vector;
 
 /**
  * Type: AIRS1
@@ -30,8 +29,8 @@ import weka.core.Utils;
  * @author Jason Brownlee
  *
  */
-public class AIRS2 extends Classifier 
-	implements OptionHandler, AIRSParameterDocumentation
+public class AIRS2 extends AbstractClassifier
+	implements AIRSParameterDocumentation
 {
 	// paramters	
 	protected long seed;	

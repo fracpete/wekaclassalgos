@@ -1,17 +1,16 @@
 package weka.classifiers.immune.clonalg;
 
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Vector;
-
-import weka.classifiers.Classifier;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.OptionHandler;
 import weka.core.UnsupportedClassTypeException;
 import weka.core.Utils;
+
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Type: CLONALG <br>
@@ -22,7 +21,7 @@ import weka.core.Utils;
  * 
  * @author Jason Brownlee
  */
-public class CSCA extends Classifier implements OptionHandler
+public class CSCA extends AbstractClassifier
 {
 	// user paramters
 	protected int initialPopulationSize; // S

@@ -1,11 +1,6 @@
 package weka.classifiers.neural.lvq;
 
-import java.text.NumberFormat;
-import java.util.Enumeration;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Vector;
-
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.neural.lvq.initialise.InitialisationFactory;
@@ -19,6 +14,12 @@ import weka.core.UnsupportedClassTypeException;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 
+import java.text.NumberFormat;
+import java.util.Enumeration;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Vector;
+
 /**
  * Date: 22/05/2004
  * File: HierarchalLVQ.java
@@ -26,8 +27,8 @@ import weka.core.WeightedInstancesHandler;
  * @author Jason Brownlee
  *
  */
-public class HierarchalLvq extends Classifier
-	implements OptionHandler, WeightedInstancesHandler
+public class HierarchalLvq extends AbstractClassifier
+	implements WeightedInstancesHandler
 {
 	/**
 	 * Index of the initialsiation parameter
@@ -230,7 +231,7 @@ public class HierarchalLvq extends Classifier
 			throws Exception
 	{
 		// clone the selected model type		
-		Classifier clusterClassifier = Classifier.makeCopies(subModelType, 1)[0];		
+		Classifier clusterClassifier = AbstractClassifier.makeCopies(subModelType, 1)[0];
 		// train the model
 		clusterClassifier.buildClassifier(aClusterTrainingSet);
 		return clusterClassifier;
@@ -638,8 +639,10 @@ public class HierarchalLvq extends Classifier
    protected String getClassifierSpec(Classifier c)
    {
 	   String name = c.getClass().getName();
-	   String params = Utils.joinOptions(c.getOptions());
-	   return  name + " " + params;
+	   String params = "";
+	   if (c instanceof OptionHandler)
+	     params = Utils.joinOptions(((OptionHandler) c).getOptions());
+	   return (name + " " + params).trim();
    }   
 	/**
 	 * Prepares the provided classifier from a string
@@ -667,7 +670,7 @@ public class HierarchalLvq extends Classifier
 		classifierSpec[0] = "";
 
 		// consrtuct the classifier with its params
-		return Classifier.forName(classifierName, classifierSpec);
+		return AbstractClassifier.forName(classifierName, classifierSpec);
 	}	
 	public String globalInfo()
 	{

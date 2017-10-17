@@ -39,7 +39,7 @@ public class Immunos2Algorithm extends Immunos1Algorithm
                 for (int k = 0; k < exemplars[i].length; k++)
                 {
                     // check for missing
-                    if(Instance.isMissingValue(current.value(k)))
+                    if(weka.core.Utils.isMissingValue(current.value(k)))
                     {
                         continue;
                     }

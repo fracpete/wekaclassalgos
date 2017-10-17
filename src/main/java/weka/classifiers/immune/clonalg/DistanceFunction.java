@@ -4,16 +4,15 @@
  */
 package weka.classifiers.immune.clonalg;
 
-import java.io.Serializable;
-
 import weka.classifiers.immune.affinity.AttributeDistance;
 import weka.classifiers.immune.affinity.ClassAttributeDistance;
 import weka.classifiers.immune.affinity.NominalAttributeDistance;
 import weka.classifiers.immune.affinity.NumericAttributeDistance;
 import weka.classifiers.immune.affinity.UnsupportedAttributeDistance;
 import weka.core.Attribute;
-import weka.core.Instance;
 import weka.core.Instances;
+
+import java.io.Serializable;
 
 /**
  * Type: AffinityFunction
@@ -158,8 +157,8 @@ public class DistanceFunction implements Serializable
 		for (int i = 0; i < distanceMeasures.length; i++)
 		{		    
 		    // check for empty value
-		    if(Instance.isMissingValue(i1[i]) ||
-		            Instance.isMissingValue(i2[i]))
+		    if(weka.core.Utils.isMissingValue(i1[i]) ||
+		            weka.core.Utils.isMissingValue(i2[i]))
 		    {
 		        // never attempt to compare missing values
 		        continue;

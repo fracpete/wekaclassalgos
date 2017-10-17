@@ -1,5 +1,6 @@
 package weka.filters.unsupervised.attribute;
 
+import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.SparseInstance;
@@ -137,7 +138,7 @@ public class NormalizeMidpointZero extends Filter
                 {
                     if (input.attribute(i).isNumeric())
                     {
-                        if (!Instance.isMissingValue(value[i]))
+                        if (!weka.core.Utils.isMissingValue(value[i]))
                         {
                             if (Double.isNaN(m_MinArray[i]))
                             {
@@ -194,7 +195,7 @@ public class NormalizeMidpointZero extends Filter
                 double value;
 
                 // value is numeric and has a value
-                if (instance.attribute(j).isNumeric() && (!Instance.isMissingValue(vals[j])) )
+                if (instance.attribute(j).isNumeric() && (!weka.core.Utils.isMissingValue(vals[j])) )
                 {
                     // not a number or all values are the same
                     if (Double.isNaN(m_MinArray[j]) || (m_MaxArray[j] == m_MinArray[j]))
@@ -240,7 +241,7 @@ public class NormalizeMidpointZero extends Filter
             for (int j = 0; j < getInputFormat().numAttributes(); j++)
             {
                 // is numeric and not a missing value
-                if (instance.attribute(j).isNumeric() && (!Instance.isMissingValue(vals[j])))
+                if (instance.attribute(j).isNumeric() && (!weka.core.Utils.isMissingValue(vals[j])))
                 {
                     // not a number of the values are the same
                     if (Double.isNaN(m_MinArray[j]) || (m_MaxArray[j] == m_MinArray[j]))
@@ -255,7 +256,7 @@ public class NormalizeMidpointZero extends Filter
                 }
             }
 
-            inst = new Instance(instance.weight(), vals);
+            inst = new DenseInstance(instance.weight(), vals);
         }
         inst.setDataset(instance.dataset());
         push(inst);

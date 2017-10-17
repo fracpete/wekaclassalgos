@@ -1,10 +1,6 @@
 package weka.classifiers.neural.lvq;
 
-import java.text.NumberFormat;
-import java.util.Iterator;
-import java.util.LinkedList;
-
-import weka.classifiers.Classifier;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.neural.common.RandomWrapper;
 import weka.classifiers.neural.lvq.algorithm.CommonAncestor;
 import weka.classifiers.neural.lvq.event.EpochEventListener;
@@ -18,6 +14,10 @@ import weka.core.SelectedTag;
 import weka.core.UnsupportedClassTypeException;
 import weka.core.WeightedInstancesHandler;
 
+import java.text.NumberFormat;
+import java.util.Iterator;
+import java.util.LinkedList;
+
 /**
  * Date: 25/05/2004
  * File: AlgorithmAncestor.java
@@ -25,8 +25,8 @@ import weka.core.WeightedInstancesHandler;
  * @author Jason Brownlee
  *
  */
-public abstract class AlgorithmAncestor extends Classifier
-	implements OptionHandler, WeightedInstancesHandler
+public abstract class AlgorithmAncestor extends AbstractClassifier
+	implements WeightedInstancesHandler
 {
 	protected final LinkedList epochEventListeners;
 	

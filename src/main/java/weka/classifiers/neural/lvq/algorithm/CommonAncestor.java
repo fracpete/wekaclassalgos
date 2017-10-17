@@ -1,9 +1,5 @@
 package weka.classifiers.neural.lvq.algorithm;
 
-import java.io.Serializable;
-import java.util.Iterator;
-import java.util.LinkedList;
-
 import weka.classifiers.neural.common.RandomWrapper;
 import weka.classifiers.neural.common.learning.LearningRateKernel;
 import weka.classifiers.neural.lvq.event.EpochEventListener;
@@ -11,6 +7,11 @@ import weka.classifiers.neural.lvq.model.CodebookVector;
 import weka.classifiers.neural.lvq.model.CommonModel;
 import weka.core.Instance;
 import weka.core.Instances;
+import weka.core.Utils;
+
+import java.io.Serializable;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * Date: 25/05/2004
@@ -92,7 +93,7 @@ public abstract class CommonAncestor implements Serializable
 		for(int i=0; i<attributes.length; i++)
 		{
 			if (i != aInstance.classIndex() &&  // class attribute cannot be adjusted
-				!Instance.isMissingValue(aInstance.value(i))) // never try to adjust towards a missing value
+				!Utils.isMissingValue(aInstance.value(i))) // never try to adjust towards a missing value
 			{
 				// calculate the delta (weighted difference) and update codebook vector
 				attributes[i] += (aLearningRate * (aInstance.value(i) - attributes[i]));

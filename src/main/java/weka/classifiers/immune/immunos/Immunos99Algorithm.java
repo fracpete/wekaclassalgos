@@ -1,6 +1,10 @@
 
 package weka.classifiers.immune.immunos;
 
+import weka.classifiers.immune.affinity.AttributeDistance;
+import weka.core.Instance;
+import weka.core.Instances;
+
 import java.io.Serializable;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
@@ -9,10 +13,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Random;
-
-import weka.classifiers.immune.affinity.AttributeDistance;
-import weka.core.Instance;
-import weka.core.Instances;
 
 /**
  * Type: Immunos99Algorithm<br>
@@ -615,7 +615,7 @@ public class Immunos99Algorithm implements Serializable
             }
             else if(attribs[i].isNumeric())
             {
-                if(Instance.isMissingValue(data[i]))
+                if(weka.core.Utils.isMissingValue(data[i]))
                 {
                     // select random instance from the stock
                     Immunos99Antibody selected = null;
@@ -630,7 +630,7 @@ public class Immunos99Algorithm implements Serializable
                             break; // use it anyway
                         }
                     }
-                    while(!Instance.isMissingValue(selected.getAttributes()[i]));                        
+                    while(!weka.core.Utils.isMissingValue(selected.getAttributes()[i]));
                     data[i] = selected.getAttributes()[i];
                 }
                 else

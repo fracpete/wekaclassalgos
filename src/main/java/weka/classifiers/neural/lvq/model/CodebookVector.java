@@ -1,8 +1,9 @@
 package weka.classifiers.neural.lvq.model;
 
-import java.io.Serializable;
-
 import weka.core.Instance;
+import weka.core.Utils;
+
+import java.io.Serializable;
 
 /**
  * 
@@ -166,7 +167,7 @@ public class CodebookVector
 		distance = aDistance;
 		
 		// check for training mode
-		if(!Instance.isMissingValue(aInstance.classValue()))
+		if(!Utils.isMissingValue(aInstance.classValue()))
 		{
 			if(aInstance.classValue() == getClassification())
 			{

@@ -1,11 +1,7 @@
 
 package weka.classifiers.immune.immunos;
 
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Vector;
-
-import weka.classifiers.Classifier;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -16,6 +12,10 @@ import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.instance.Normalize;
 
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.Vector;
+
 /**
  * Type: Immunos<br>
  * Date: 28/01/2005<br>
@@ -25,7 +25,7 @@ import weka.filters.unsupervised.instance.Normalize;
  * 
  * @author Jason Brownlee
  */
-public class Immunos1 extends Classifier implements OptionHandler
+public class Immunos1 extends AbstractClassifier
 {
     protected Immunos1Algorithm algorithm;
     

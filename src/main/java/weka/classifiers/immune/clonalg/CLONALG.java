@@ -1,10 +1,6 @@
 package weka.classifiers.immune.clonalg;
 
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Vector;
-
-import weka.classifiers.Classifier;
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Evaluation;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -12,6 +8,10 @@ import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.UnsupportedClassTypeException;
 import weka.core.Utils;
+
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Type: CLONALG <br>
@@ -22,7 +22,7 @@ import weka.core.Utils;
  * 
  * @author Jason Brownlee
  */
-public class CLONALG extends Classifier implements OptionHandler
+public class CLONALG extends AbstractClassifier
 {
     protected double clonalFactor; // beta    
     protected int antibodyPoolSize; // N    

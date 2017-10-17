@@ -101,6 +101,18 @@
     </dependency>
 
     <dependency>
+      <groupId>nz.ac.waikato.cms.weka</groupId>
+      <artifactId>normalize</artifactId>
+      <version>1.0.1</version>
+      <exclusions>
+        <exclusion>
+          <groupId>nz.ac.waikato.cms.weka</groupId>
+          <artifactId>weka-dev</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+
+    <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
       <version>3.8.2</version>

@@ -1,18 +1,18 @@
 package weka.classifiers.neural.lvq;
 
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Vector;
-
+import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.neural.lvq.model.CommonModel;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.OptionHandler;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
+
+import java.util.Enumeration;
+import java.util.LinkedList;
+import java.util.Vector;
 
 /**
  * Date: 26/05/2004
@@ -21,8 +21,8 @@ import weka.core.WeightedInstancesHandler;
  * @author Jason Brownlee
  *
  */
-public class MultipassSom extends Classifier
-	implements OptionHandler, WeightedInstancesHandler
+public class MultipassSom extends AbstractClassifier
+	implements WeightedInstancesHandler
 {	
 	private final static int PARAM_CLASSIFIER_1 = 0;
 	private final static int PARAM_CLASSIFIER_2 = 1;
@@ -269,7 +269,7 @@ public class MultipassSom extends Classifier
 		classifierSpec[0] = "";
 
 		// consrtuct the classifier with its params
-		return Classifier.forName(classifierName, classifierSpec);
+		return AbstractClassifier.forName(classifierName, classifierSpec);
 	}
 
 	public String [] getOptions()
