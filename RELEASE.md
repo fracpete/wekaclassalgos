@@ -29,7 +29,7 @@ Weka package
   `2017.10.18`:
 
   ```
-  ant -f build_package.xml -Dpackage=multisearch-2017.10.18 clean make_package
+  ant -f build_package.xml -Dpackage=wekaclassalgos-2017.10.18 clean make_package
   ```
 
 * Create a release tag on github (`v2017.10.18`)
