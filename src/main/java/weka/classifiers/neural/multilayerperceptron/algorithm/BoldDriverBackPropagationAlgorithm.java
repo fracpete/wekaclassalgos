@@ -1,12 +1,12 @@
 package weka.classifiers.neural.multilayerperceptron.algorithm;
 
-import java.util.Enumeration;
-
 import weka.classifiers.neural.common.RandomWrapper;
 import weka.classifiers.neural.common.learning.LearningRateKernel;
 import weka.classifiers.neural.common.transfer.TransferFunction;
 import weka.core.Instance;
 import weka.core.Instances;
+
+import java.util.Enumeration;
 
 
 /**
@@ -14,7 +14,7 @@ import weka.core.Instances;
  * Date: 31/05/2004
  * File: BoldDriverBackPropagationAlgorithm.java
  * 
- * Adaptive learning rate algorithm, Bold Driver (Vogl’s Method)
+ * Adaptive learning rate algorithm, Bold Driver (Vogl's Method)
  * 
  * @author Jason Brownlee
  *
