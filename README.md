@@ -1,7 +1,8 @@
 wekaclassalgos
 ==============
 
-Fork of the following defunct Sourceforge.net project, which was tailored to Weka 3.6.4:
+Fork of the following defunct Sourceforge.net project by Jason Brownlee, 
+which was tailored to Weka 3.6.4:
 
 https://sourceforge.net/projects/wekaclassalgos/
 
@@ -46,7 +47,7 @@ Click on one of the following links to download the corresponding Weka package:
 * [2017.10.18](https://github.com/fracpete/wekaclassalgos/releases/download/v2017.10.18/wekaclassalgos-2017.10.18.zip)
 
 
-**NB:** You need to install the *normalize* package (>=1.0.1) first before 
+**NB:** You need to install the *normalize* package (>=1.0.1) first, before 
 installing this unofficial package. Otherwise the package manager will report
 an error.
 
