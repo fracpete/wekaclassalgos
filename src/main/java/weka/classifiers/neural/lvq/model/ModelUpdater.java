@@ -3,11 +3,10 @@ package weka.classifiers.neural.lvq.model;
 /**
  * Date: 25/05/2004
  * File: ModelUpdater.java
- * 
- * @author Jason Brownlee
  *
+ * @author Jason Brownlee
  */
-public interface ModelUpdater
-{
-	void updateCodebookVector(CodebookVector aCodebookVector);
+public interface ModelUpdater {
+
+  void updateCodebookVector(CodebookVector aCodebookVector);
 }

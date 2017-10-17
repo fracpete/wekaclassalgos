@@ -6,15 +6,14 @@ import weka.classifiers.neural.lvq.vectordistance.AttributeDistance;
 /**
  * Date: 25/05/2004
  * File: ModelInitialiser.java
- * 
- * @author Jason Brownlee
  *
+ * @author Jason Brownlee
  */
-public interface ModelInitialiser
-{
-	void initialiseCodebookVector(CodebookVector aCodebookVector);
-	
-	AttributeDistance [] getAttributeDistanceList();
-	
-	String [] getClassLables();
+public interface ModelInitialiser {
+
+  void initialiseCodebookVector(CodebookVector aCodebookVector);
+
+  AttributeDistance[] getAttributeDistanceList();
+
+  String[] getClassLables();
 }

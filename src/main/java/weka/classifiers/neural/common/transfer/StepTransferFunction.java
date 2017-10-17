@@ -5,50 +5,44 @@ package weka.classifiers.neural.common.transfer;
  * <p>Description: ...</p>
  * <p>Copyright: Copyright (c) 2003</p>
  * <p>Company: N/A</p>
+ *
  * @author Jason Brownlee
  * @version 1.0
  */
 
-public class StepTransferFunction extends TransferFunction
-{
-    public final static double THRESHOLD = 0.0;
+public class StepTransferFunction extends TransferFunction {
 
-    public final static double MAX = +1.0;
-    public final static double MIN =  0.0;
+  public final static double THRESHOLD = 0.0;
+
+  public final static double MAX = +1.0;
+
+  public final static double MIN = 0.0;
 
 
-
-
-    public double transfer(double activation)
-    {
-       if(activation <= THRESHOLD)
-       {
-           return MIN;
-       }
-
-       // > 0.0
-       return MAX;
+  public double transfer(double activation) {
+    if (activation <= THRESHOLD) {
+      return MIN;
     }
 
-    public double derivative(double activation, double transferred)
-    {
-        //derivative is the Dirac delta function
+    // > 0.0
+    return MAX;
+  }
 
-        if(transferred == 0.0)
-        {
-            return Double.POSITIVE_INFINITY;
-        }
+  public double derivative(double activation, double transferred) {
+    //derivative is the Dirac delta function
 
-        return 0.0;
+    if (transferred == 0.0) {
+      return Double.POSITIVE_INFINITY;
     }
 
-    public double getMaximum()
-    {
-        return MAX;
-    }
+    return 0.0;
+  }
 
-    public double getMinimum()
-    {
-        return MIN;
-    }
+  public double getMaximum() {
+    return MAX;
+  }
+
+  public double getMinimum() {
+    return MIN;
+  }
 }

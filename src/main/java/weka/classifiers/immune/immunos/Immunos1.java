@@ -1,4 +1,3 @@
-
 package weka.classifiers.immune.immunos;
 
 import weka.classifiers.AbstractClassifier;
@@ -6,7 +5,6 @@ import weka.classifiers.Evaluation;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.OptionHandler;
 import weka.core.UnsupportedClassTypeException;
 import weka.core.Utils;
 import weka.filters.Filter;
@@ -20,185 +18,161 @@ import java.util.Vector;
  * Type: Immunos<br>
  * Date: 28/01/2005<br>
  * <br>
- * 
- * Description: 
- * 
+ * <p>
+ * Description:
+ *
  * @author Jason Brownlee
  */
-public class Immunos1 extends AbstractClassifier
-{
-    protected Immunos1Algorithm algorithm;
-    
-    protected Normalize normaliser;
-    
-    
-    public void buildClassifier(Instances data) throws Exception
-    {
-		Instances trainingInstances = new Instances(data);
+public class Immunos1 extends AbstractClassifier {
 
-		
-		// must have a class assigned
-		if (trainingInstances.classIndex() < 0)
-		{
-			throw new Exception("No class attribute assigned to instances");
-		}		
-		// class must be nominal
-		else if(!trainingInstances.classAttribute().isNominal())
-		{
-			throw new UnsupportedClassTypeException("Class attribute must be nominal");
-		}
-		// must have attributes besides the class attribute
-		else if(trainingInstances.numAttributes() <= +1)
-		{
-			throw new Exception("Dataset contains no supported comparable attributes");
-		}
-		
-		// delete with missing class
-		trainingInstances.deleteWithMissingClass();
-		for (int i = 0; i < trainingInstances.numAttributes(); i++)
-		{
-			trainingInstances.deleteWithMissing(i);
-		}
-		
-		// must have some training instances
-		if (trainingInstances.numInstances() == 0)
-		{
-			throw new Exception("No usable training instances!");
-		}
-		
-		// normalise the dataset
-        normaliser = new Normalize();
-        normaliser.setInputFormat(trainingInstances);
-        trainingInstances = Filter.useFilter(trainingInstances, normaliser);
+  protected Immunos1Algorithm algorithm;
 
-		// construct trainer
-		algorithm = new Immunos1Algorithm();
+  protected Normalize normaliser;
 
-		// train
-		algorithm.train(trainingInstances);
+
+  public void buildClassifier(Instances data) throws Exception {
+    Instances trainingInstances = new Instances(data);
+
+
+    // must have a class assigned
+    if (trainingInstances.classIndex() < 0) {
+      throw new Exception("No class attribute assigned to instances");
     }
-    
-    public double classifyInstance(Instance instance) throws Exception
-    {
-        if (algorithm == null)
-        {
-            throw new Exception("Algorithm has not been prepared.");
-        }
-        
-        // normalise the instance
-        normaliser.input(instance);
-        normaliser.batchFinished();
-        instance = normaliser.output();
-        
-        return algorithm.classify(instance);
+    // class must be nominal
+    else if (!trainingInstances.classAttribute().isNominal()) {
+      throw new UnsupportedClassTypeException("Class attribute must be nominal");
+    }
+    // must have attributes besides the class attribute
+    else if (trainingInstances.numAttributes() <= +1) {
+      throw new Exception("Dataset contains no supported comparable attributes");
     }
 
-    public String toString()
-    {
-        StringBuffer buffer = new StringBuffer(1000);
-        buffer.append("Immunos-1 v1.0.\n");
-        return buffer.toString();
+    // delete with missing class
+    trainingInstances.deleteWithMissingClass();
+    for (int i = 0; i < trainingInstances.numAttributes(); i++) {
+      trainingInstances.deleteWithMissing(i);
     }
 
-    public String globalInfo()
-    {
-        StringBuffer buffer = new StringBuffer(1000);
-        buffer.append(toString());
-        buffer.append("\n\n");
-
-        buffer.append(" Jason Brownlee.  " +
-        		"[Technical Report].  " +
-        		"Immunos-81 - The Misunderstood Artificial Immune System.  " +
-        		"Victoria, Australia: " +
-        		"Centre for Intelligent Systems and Complex Processes (CISCP), " +
-        		"Faculty of Information and Communication Technologies (ICT), " +
-        		"Swinburne University of Technology; " +
-        		"2005 Feb; " +
-        		"Technical Report ID: 3-01. ");
-        
-        return buffer.toString();
-    }
-    
-    
-    public Enumeration listOptions()
-    {
-        Vector<Option> list = new Vector<Option>(15);
-
-        // add parents options
-        Enumeration e = super.listOptions();
-        while (e.hasMoreElements())
-        {
-            list.add((Option) e.nextElement());
-        }
-
-        return list.elements();
+    // must have some training instances
+    if (trainingInstances.numInstances() == 0) {
+      throw new Exception("No usable training instances!");
     }
 
-    public void setOptions(String[] options) throws Exception
-    {
-        // parental option setting
-        super.setOptions(options);
+    // normalise the dataset
+    normaliser = new Normalize();
+    normaliser.setInputFormat(trainingInstances);
+    trainingInstances = Filter.useFilter(trainingInstances, normaliser);
+
+    // construct trainer
+    algorithm = new Immunos1Algorithm();
+
+    // train
+    algorithm.train(trainingInstances);
+  }
+
+  public double classifyInstance(Instance instance) throws Exception {
+    if (algorithm == null) {
+      throw new Exception("Algorithm has not been prepared.");
     }
 
-    protected double getDouble(String param, String[] options) throws Exception
-    {
-        String value = Utils.getOption(param.charAt(0), options);
-        if (value == null)
-        {
-            throw new Exception("Parameter not provided: " + param);
-        }
+    // normalise the instance
+    normaliser.input(instance);
+    normaliser.batchFinished();
+    instance = normaliser.output();
 
-        return Double.parseDouble(value);
+    return algorithm.classify(instance);
+  }
+
+  public String toString() {
+    StringBuffer buffer = new StringBuffer(1000);
+    buffer.append("Immunos-1 v1.0.\n");
+    return buffer.toString();
+  }
+
+  public String globalInfo() {
+    StringBuffer buffer = new StringBuffer(1000);
+    buffer.append(toString());
+    buffer.append("\n\n");
+
+    buffer.append(" Jason Brownlee.  " +
+      "[Technical Report].  " +
+      "Immunos-81 - The Misunderstood Artificial Immune System.  " +
+      "Victoria, Australia: " +
+      "Centre for Intelligent Systems and Complex Processes (CISCP), " +
+      "Faculty of Information and Communication Technologies (ICT), " +
+      "Swinburne University of Technology; " +
+      "2005 Feb; " +
+      "Technical Report ID: 3-01. ");
+
+    return buffer.toString();
+  }
+
+
+  public Enumeration listOptions() {
+    Vector<Option> list = new Vector<Option>(15);
+
+    // add parents options
+    Enumeration e = super.listOptions();
+    while (e.hasMoreElements()) {
+      list.add((Option) e.nextElement());
     }
 
-    protected int getInteger(String param, String[] options) throws Exception
-    {
-        String value = Utils.getOption(param.charAt(0), options);
-        if (value == null)
-        {
-            throw new Exception("Parameter not provided: " + param);
-        }
+    return list.elements();
+  }
 
-        return Integer.parseInt(value);
+  public void setOptions(String[] options) throws Exception {
+    // parental option setting
+    super.setOptions(options);
+  }
+
+  protected double getDouble(String param, String[] options) throws Exception {
+    String value = Utils.getOption(param.charAt(0), options);
+    if (value == null) {
+      throw new Exception("Parameter not provided: " + param);
     }
 
-    protected long getLong(String param, String[] options) throws Exception
-    {
-        String value = Utils.getOption(param.charAt(0), options);
-        if (value == null)
-        {
-            throw new Exception("Parameter not provided: " + param);
-        }
+    return Double.parseDouble(value);
+  }
 
-        return Long.parseLong(value);
+  protected int getInteger(String param, String[] options) throws Exception {
+    String value = Utils.getOption(param.charAt(0), options);
+    if (value == null) {
+      throw new Exception("Parameter not provided: " + param);
     }
 
+    return Integer.parseInt(value);
+  }
 
-    public String[] getOptions()
-    {
-        LinkedList<String> list = new LinkedList<String>();
-
-        String[] options = super.getOptions();
-        
-        for (int i = 0; i < options.length; i++)
-        {
-            list.add(options[i]);
-        }
-
-        return list.toArray(new String[list.size()]);
+  protected long getLong(String param, String[] options) throws Exception {
+    String value = Utils.getOption(param.charAt(0), options);
+    if (value == null) {
+      throw new Exception("Parameter not provided: " + param);
     }
-    
-    
-    public static void main(String[] argv)
-    {
 
-        try
-        {
-            System.out.println(Evaluation.evaluateModel(new Immunos1(), argv));
-        }
-        catch (Exception e)
-        {
-            System.err.println(e.getMessage());
-        }
+    return Long.parseLong(value);
+  }
+
+
+  public String[] getOptions() {
+    LinkedList<String> list = new LinkedList<String>();
+
+    String[] options = super.getOptions();
+
+    for (int i = 0; i < options.length; i++) {
+      list.add(options[i]);
     }
+
+    return list.toArray(new String[list.size()]);
+  }
+
+
+  public static void main(String[] argv) {
+
+    try {
+      System.out.println(Evaluation.evaluateModel(new Immunos1(), argv));
+    }
+    catch (Exception e) {
+      System.err.println(e.getMessage());
+    }
+  }
 }
