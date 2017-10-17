@@ -23,10 +23,11 @@ import weka.classifiers.AbstractClassifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.immune.airs.algorithm.AIRS2Trainer;
 import weka.classifiers.immune.airs.algorithm.AISModelClassifier;
+import weka.core.Capabilities;
+import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.UnsupportedClassTypeException;
 import weka.core.Utils;
 
 import java.util.Enumeration;
@@ -118,6 +119,31 @@ public class AIRS2 extends AbstractClassifier
     knn = 3;
   }
 
+  /**
+   * Returns the Capabilities of this classifier.
+   *
+   * @return the capabilities of this object
+   * @see Capabilities
+   */
+  @Override
+  public Capabilities getCapabilities() {
+    Capabilities result = super.getCapabilities();
+
+    result.disableAll();
+
+    // attributes
+    result.enable(Capability.NUMERIC_ATTRIBUTES);
+    result.enable(Capability.DATE_ATTRIBUTES);
+    result.enable(Capability.NOMINAL_ATTRIBUTES);
+
+    // class
+    result.enable(Capability.NOMINAL_CLASS);
+    result.enable(Capability.MISSING_CLASS_VALUES);
+
+    result.setMinimumNumberInstances(1);
+
+    return result;
+  }
 
   /**
    * @param data
@@ -125,30 +151,9 @@ public class AIRS2 extends AbstractClassifier
    */
   public void buildClassifier(Instances data) throws Exception {
     Instances trainingInstances = new Instances(data);
-
-    // must have a class assigned
-    if (trainingInstances.classIndex() < 0) {
-      throw new Exception("No class attribute assigned to instances");
-    }
-    // class must be nominal
-    else if (!trainingInstances.classAttribute().isNominal()) {
-      throw new UnsupportedClassTypeException("Class attribute must be nominal");
-    }
-    // must have attributes besides the class attribute
-    else if (trainingInstances.numAttributes() <= +1) {
-      throw new Exception("Dataset contains no supported comparable attributes");
-    }
-
-    // delete with missing class
     trainingInstances.deleteWithMissingClass();
-    for (int i = 0; i < trainingInstances.numAttributes(); i++) {
-      trainingInstances.deleteWithMissing(i);
-    }
 
-    // must have some training instances
-    if (trainingInstances.numInstances() == 0) {
-      throw new Exception("No usable training instances!");
-    }
+    getCapabilities().testWithFail(trainingInstances);
 
     // validate paramters
     validateParameters(trainingInstances);

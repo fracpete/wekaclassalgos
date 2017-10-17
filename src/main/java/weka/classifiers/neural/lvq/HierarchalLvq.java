@@ -20,12 +20,13 @@ import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.neural.lvq.initialise.InitialisationFactory;
 import weka.classifiers.neural.lvq.model.CodebookVector;
+import weka.core.Capabilities;
+import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
 import weka.core.OptionHandler;
 import weka.core.SelectedTag;
-import weka.core.UnsupportedClassTypeException;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 
@@ -458,6 +459,32 @@ public class HierarchalLvq extends AbstractClassifier
   }
 
   /**
+   * Returns the Capabilities of this classifier.
+   *
+   * @return the capabilities of this object
+   * @see Capabilities
+   */
+  @Override
+  public Capabilities getCapabilities() {
+    Capabilities result = super.getCapabilities();
+
+    result.disableAll();
+
+    // attributes
+    result.enable(Capability.NUMERIC_ATTRIBUTES);
+    result.enable(Capability.DATE_ATTRIBUTES);
+    result.enable(Capability.NOMINAL_ATTRIBUTES);
+
+    // class
+    result.enable(Capability.NOMINAL_CLASS);
+    result.enable(Capability.MISSING_CLASS_VALUES);
+
+    result.setMinimumNumberInstances(1);
+
+    return result;
+  }
+
+  /**
    * Build a model of the provided training dataset using the specific LVQ
    * algorithm implementation. The model is constructed (if not already provided),
    * it is initialised, then the model is trained (constructed) using
@@ -509,23 +536,9 @@ public class HierarchalLvq extends AbstractClassifier
   protected Instances prepareDataset(final Instances instances)
     throws Exception {
     Instances trainingInstances = new Instances(instances);
+    trainingInstances.deleteWithMissingClass();
 
-    // must have a class assigned
-    if (trainingInstances.classIndex() < 0) {
-      throw new Exception("No class attribute assigned to instances");
-    }
-    // class must be nominal
-    else if (!trainingInstances.classAttribute().isNominal()) {
-      throw new UnsupportedClassTypeException("Class attribute must be nominal");
-    }
-    // must have some training instances
-    else if (trainingInstances.numInstances() == 0) {
-      throw new Exception("No usable training instances!");
-    }
-    // must have attributes besides the class attribute
-    else if (trainingInstances.numAttributes() <= +1) {
-      throw new Exception("Dataset contains no supported comparable attributes");
-    }
+    getCapabilities().testWithFail(trainingInstances);
 
     numClasses = trainingInstances.numClasses();
     numAttributes = trainingInstances.numAttributes();

@@ -20,10 +20,11 @@ import weka.classifiers.neural.common.learning.LearningKernelFactory;
 import weka.classifiers.neural.common.training.NeuralTrainer;
 import weka.classifiers.neural.common.training.TrainerFactory;
 import weka.classifiers.neural.common.transfer.TransferFunctionFactory;
+import weka.core.Capabilities;
+import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.UnsupportedClassTypeException;
 import weka.core.WeightedInstancesHandler;
 
 import java.util.Collection;
@@ -195,42 +196,37 @@ public abstract class WekaAlgorithmAncestor extends AbstractClassifier
     return output;
   }
 
+  /**
+   * Returns the Capabilities of this classifier.
+   *
+   * @return the capabilities of this object
+   * @see Capabilities
+   */
+  @Override
+  public Capabilities getCapabilities() {
+    Capabilities result = super.getCapabilities();
+
+    result.disableAll();
+
+    // attributes
+    result.enable(Capability.NUMERIC_ATTRIBUTES);
+    result.enable(Capability.DATE_ATTRIBUTES);
+
+    // class
+    result.enable(Capability.NOMINAL_CLASS);
+    result.enable(Capability.NUMERIC_CLASS);
+    result.enable(Capability.MISSING_CLASS_VALUES);
+
+    result.setMinimumNumberInstances(1);
+
+    return result;
+  }
 
   protected Instances prepareTrainingDataset(Instances aInstances) throws Exception {
     Instances trainingInstances = new Instances(aInstances);
-
-    // must have a class assigned
-    if (trainingInstances.classIndex() < 0) {
-      throw new Exception("No class attribute assigned to instances");
-    }
-
-    // must have attributes besides the class attribute
-    if (trainingInstances.numAttributes() <= +1) {
-      throw new Exception("Dataset contains no supported comparable attributes");
-    }
-
-    // class must be nominal or numeric
-    if (!trainingInstances.classAttribute().isNominal() && !trainingInstances.classAttribute().isNumeric()) {
-      throw new UnsupportedClassTypeException("Class attribute must be nominal");
-    }
-
-    // check each attribute
-    for (int i = 0; i < trainingInstances.numAttributes(); i++) {
-      // all non-class attributes must be numeric
-      if (i != trainingInstances.classIndex()) {
-	if (!trainingInstances.attribute(i).isNumeric()) {
-	  throw new Exception("Only numeric attributes are supported as network inputs");
-	}
-      }
-    }
-
-    // remove instances with missing class values
     trainingInstances.deleteWithMissingClass();
 
-    // must have some training instances
-    if (trainingInstances.numInstances() == 0) {
-      throw new Exception("No usable training instances!");
-    }
+    getCapabilities().testWithFail(trainingInstances);
 
     numInstances = trainingInstances.numInstances();
     numClasses = trainingInstances.numClasses();
