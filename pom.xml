@@ -5,7 +5,7 @@
 
   <groupId>com.github.fracpete</groupId>
   <artifactId>wekaclassalgos</artifactId>
-  <version>2023.2.8-SNAPSHOT</version>
+  <version>2023.2.8</version>
   <packaging>jar</packaging>
 
   <name>wekaclassalgos</name>
