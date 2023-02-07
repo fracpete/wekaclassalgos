@@ -166,7 +166,7 @@ public class CSCAAlgorithm implements Serializable {
 
 
   protected String getModelSummary(Instances aInstances) {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
 
     // data reduction percentage
     double dataReduction = 100.0 * (1.0 - ((double) memoryPool.size() / (double) aInstances.numInstances()));
@@ -193,7 +193,7 @@ public class CSCAAlgorithm implements Serializable {
   }
 
   protected String getTrainingSummary(Instances aInstances) {
-    StringBuffer b = new StringBuffer(1024);
+    StringBuilder b = new StringBuilder();
 
     if (debug) {
       b.append(" - Training Summary - \n");

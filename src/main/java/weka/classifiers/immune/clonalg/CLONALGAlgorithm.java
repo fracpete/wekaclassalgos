@@ -241,7 +241,7 @@ public class CLONALGAlgorithm implements Serializable {
       }
     }
 
-    return clones.toArray(new Antibody[clones.size()]);
+    return clones.toArray(new Antibody[0]);
   }
 
 

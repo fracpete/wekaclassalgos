@@ -38,7 +38,7 @@ public class NeighbourhoodDistanceFactory {
   public final static String DESCRIPTION;
 
   static {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     buffer.append("(");
 
     for (int i = 0; i < TAGS_MODEL_TOPOLOGY.length; i++) {

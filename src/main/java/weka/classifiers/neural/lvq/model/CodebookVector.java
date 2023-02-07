@@ -90,7 +90,7 @@ public class CodebookVector
    * @return String
    */
   public String toString() {
-    StringBuffer buffer = new StringBuffer(100);
+    StringBuilder buffer = new StringBuilder();
 
     // all attributes
     for (int i = 0; i < attributes.length; i++) {

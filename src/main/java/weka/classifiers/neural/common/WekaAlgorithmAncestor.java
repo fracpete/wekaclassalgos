@@ -27,9 +27,12 @@ import weka.core.Instances;
 import weka.core.Option;
 import weka.core.WeightedInstancesHandler;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -122,11 +125,11 @@ public abstract class WekaAlgorithmAncestor extends AbstractClassifier
 
   protected abstract NeuralModel prepareAlgorithm(Instances instances) throws Exception;
 
-  protected abstract Collection getListOptions();
+  protected abstract Collection<Option> getListOptions();
 
   protected abstract void setArguments(String[] options) throws Exception;
 
-  protected abstract Collection getAlgorithmOptions();
+  protected abstract Collection<String> getAlgorithmOptions();
 
 
   public double[] getAllWeights() {
@@ -237,7 +240,7 @@ public abstract class WekaAlgorithmAncestor extends AbstractClassifier
 
 
   public String toString() {
-    StringBuffer buffer = new StringBuffer(200);
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("--------------------------------------------");
 
@@ -276,7 +279,7 @@ public abstract class WekaAlgorithmAncestor extends AbstractClassifier
       list.add(new Option("\t" + PARAM_DESCRIPTIONS[i], PARAMETERS[i], 1, param));
     }
 
-    Collection c = getListOptions();
+    Collection<Option> c = getListOptions();
     if (c != null) {
       list.addAll(c);
     }
@@ -332,7 +335,7 @@ public abstract class WekaAlgorithmAncestor extends AbstractClassifier
 
 
   public String[] getOptions() {
-    LinkedList list = new LinkedList();
+    List<String> list = new ArrayList<String>();
 
     list.add("-" + PARAMETERS[PARAM_TRAINING_ITERATIONS]);
     list.add(Integer.toString(trainingIterations));
@@ -346,12 +349,12 @@ public abstract class WekaAlgorithmAncestor extends AbstractClassifier
     list.add("-" + PARAMETERS[PARAM_RANDOM_SEED]);
     list.add(Long.toString(randomNumberSeed));
 
-    Collection c = getAlgorithmOptions();
+    Collection<String> c = getAlgorithmOptions();
     if (c != null) {
       list.addAll(c);
     }
 
-    return (String[]) list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
   public String trainingIterationsTipText() {

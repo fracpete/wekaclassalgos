@@ -19,6 +19,7 @@ import weka.classifiers.neural.common.learning.LearningKernelFactory;
 import weka.classifiers.neural.common.learning.LearningRateKernel;
 import weka.classifiers.neural.lvq.algorithm.Lvq1Algorithm;
 import weka.core.Instances;
+import weka.core.Option;
 
 import java.util.Collection;
 
@@ -62,7 +63,7 @@ public class Lvq1 extends LvqAlgorithmAncestor {
    *
    * @return Collection
    */
-  protected Collection getListOptions() {
+  protected Collection<Option> getListOptions() {
     // do nothing
     return null;
   }
@@ -76,7 +77,7 @@ public class Lvq1 extends LvqAlgorithmAncestor {
    *
    * @return Collection
    */
-  protected Collection getAlgorithmOptions() {
+  protected Collection<String> getAlgorithmOptions() {
     // do nothing
     return null;
   }
@@ -87,7 +88,7 @@ public class Lvq1 extends LvqAlgorithmAncestor {
    * @return String
    */
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(100);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("Learning Vector Quantisation (LVQ) - LVQ1.");
     buffer.append("A single BMU (best matching unit) is selected and moved closer or ");
     buffer.append("further away from each data vector, per iteration.");

@@ -76,8 +76,8 @@ public class Perceptron extends WekaAlgorithmAncestor {
   }
 
 
-  protected Collection getAlgorithmOptions() {
-    ArrayList list = new ArrayList(2);
+  protected Collection<String> getAlgorithmOptions() {
+    ArrayList<String> list = new ArrayList<String>();
 
     list.add("-" + EXTRA_PARAMETERS[EXTRA_PARAM_LEARNING_RATE_FUNCTION]);
     list.add(Integer.toString(learningRateFunction));
@@ -86,8 +86,8 @@ public class Perceptron extends WekaAlgorithmAncestor {
 
   }
 
-  protected Collection getListOptions() {
-    ArrayList list = new ArrayList(1);
+  protected Collection<Option> getListOptions() {
+    ArrayList<Option> list = new ArrayList<Option>();
 
     for (int i = 0; i < EXTRA_PARAMETERS.length; i++) {
       String param = "-" + EXTRA_PARAMETERS[i] + " " + EXTRA_PARAMETER_NOTES[i];
@@ -98,7 +98,7 @@ public class Perceptron extends WekaAlgorithmAncestor {
   }
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("Single Layer Perceptron : Perceptron Learning Rule, Binary inputs, Sign transfer function");
 

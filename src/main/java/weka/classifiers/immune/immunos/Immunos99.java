@@ -21,12 +21,15 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.Utils;
+import weka.core.OptionHelper;
 import weka.filters.Filter;
 import weka.filters.unsupervised.instance.Normalize;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -164,7 +167,7 @@ public class Immunos99 extends AbstractClassifier {
   }
 
   public String toString() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("Immunos-99 v1.0.\n");
 
     if (trainingSummary != null) {
@@ -176,7 +179,7 @@ public class Immunos99 extends AbstractClassifier {
   }
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append(toString());
     buffer.append("\n\n");
 
@@ -212,50 +215,17 @@ public class Immunos99 extends AbstractClassifier {
   }
 
 
-  protected double getDouble(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Double.parseDouble(value);
-  }
-
-  protected int getInteger(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Integer.parseInt(value);
-  }
-
-  protected long getLong(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Long.parseLong(value);
-  }
-
   public void setOptions(String[] options) throws Exception {
+    setTotalGenerations(OptionHelper.getInteger(PARAMETERS[0], options, 1));
+    setSeed(OptionHelper.getLong(PARAMETERS[1], options, 1));
+    setMinimumFitnessThreshold(OptionHelper.getDouble(PARAMETERS[2], options, -1));
+    setSeedPopulationPercentage(OptionHelper.getDouble(PARAMETERS[3], options, 0.2));
     // parental option setting
     super.setOptions(options);
-
-    setTotalGenerations(getInteger(PARAMETERS[0], options));
-    setSeed(getLong(PARAMETERS[1], options));
-    setMinimumFitnessThreshold(getDouble(PARAMETERS[2], options));
-    setSeedPopulationPercentage(getDouble(PARAMETERS[3], options));
   }
 
   public String[] getOptions() {
-    LinkedList<String> list = new LinkedList<String>();
-
-    String[] options = super.getOptions();
-    for (int i = 0; i < options.length; i++) {
-      list.add(options[i]);
-    }
+    List<String> list = new ArrayList<String>(Arrays.asList(super.getOptions()));
 
     list.add("-" + PARAMETERS[0]);
     list.add(Integer.toString(totalGenerations));
@@ -266,7 +236,7 @@ public class Immunos99 extends AbstractClassifier {
     list.add("-" + PARAMETERS[3]);
     list.add(Double.toString(seedPopulationPercentage));
 
-    return list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
 

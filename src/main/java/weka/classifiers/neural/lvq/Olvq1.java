@@ -19,6 +19,7 @@ import weka.classifiers.neural.common.learning.LearningKernelFactory;
 import weka.classifiers.neural.common.learning.LearningRateKernel;
 import weka.classifiers.neural.lvq.algorithm.Olvq1Algorithm;
 import weka.core.Instances;
+import weka.core.Option;
 
 import java.util.Collection;
 
@@ -59,7 +60,7 @@ public class Olvq1 extends LvqAlgorithmAncestor {
    *
    * @return Collection
    */
-  protected Collection getListOptions() {
+  protected Collection<Option> getListOptions() {
     // do nothing
     return null;
   }
@@ -71,7 +72,7 @@ public class Olvq1 extends LvqAlgorithmAncestor {
   /**
    * Return a list of algorithm specific options and values
    */
-  protected Collection getAlgorithmOptions() {
+  protected Collection<String> getAlgorithmOptions() {
     // do nothing
     return null;
   }
@@ -80,7 +81,7 @@ public class Olvq1 extends LvqAlgorithmAncestor {
    * Return information about this algorithm implementation
    */
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(100);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("Learning Vector Quantisation (LVQ) - OLVQ1.");
     buffer.append("The same as LVQ1, except each codebook vector has its own learning rate. ");
     buffer.append("If the BMU has the same class, the individual learning rate is increased, ");

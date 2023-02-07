@@ -163,8 +163,8 @@ public class BackPropagation extends WekaAlgorithmAncestor {
 
   }
 
-  protected Collection getAlgorithmOptions() {
-    ArrayList list = new ArrayList(14);
+  protected Collection<String> getAlgorithmOptions() {
+    ArrayList<String> list = new ArrayList<String>();
 
     list.add("-" + EXTRA_PARAMETERS[PARAM_TRANSFER_FUNCTION]);
     list.add(Integer.toString(transferFunction));
@@ -193,8 +193,8 @@ public class BackPropagation extends WekaAlgorithmAncestor {
     return list;
   }
 
-  protected Collection getListOptions() {
-    ArrayList list = new ArrayList(7);
+  protected Collection<Option> getListOptions() {
+    ArrayList<Option> list = new ArrayList<Option>();
 
     for (int i = 0; i < EXTRA_PARAMETERS.length; i++) {
       String param = "-" + EXTRA_PARAMETERS[i] + " " + EXTRA_PARAMETER_NOTES[i];
@@ -205,7 +205,7 @@ public class BackPropagation extends WekaAlgorithmAncestor {
   }
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("Back Propagation Learning Rule, variable number of hidden layers (0-3)");
 

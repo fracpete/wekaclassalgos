@@ -45,7 +45,7 @@ public class Olvq3 extends Lvq3 {
    * @return String
    */
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(100);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("Learning Vector Quantisation (LVQ) - OLVQ1.");
     buffer.append("The same as the LVQ3 algorithm, except each codebook vector has its ");
     buffer.append("own individual learning rate (rather than a global learning rate) in the same manner as OLVQ1.");

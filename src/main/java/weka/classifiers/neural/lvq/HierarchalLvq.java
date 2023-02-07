@@ -31,9 +31,11 @@ import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 
 import java.text.NumberFormat;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -190,7 +192,7 @@ public class HierarchalLvq extends AbstractClassifier
   }
 
   private String prepareSubModelAccuracyReport() {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("-- BMU Sub-Model Accuracy --\n");
     buffer.append("bmu,\t%bmu,\t%model,\t%better,\tpruned\n");
@@ -323,7 +325,7 @@ public class HierarchalLvq extends AbstractClassifier
   }
 
   private String prepareSubModelSelectionReport() {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("-- BMU Sub-Model Selection Report --\n");
     buffer.append("bmu,\t%error,\t%hits,\tpruned\n");
@@ -611,7 +613,7 @@ public class HierarchalLvq extends AbstractClassifier
 
 
   public String[] getOptions() {
-    LinkedList list = new LinkedList();
+    List<String> list = new ArrayList<String>();
 
     list.add("-" + PARAMETERS[PARAM_BASE_ALGORITHM]);
     list.add(getClassifierSpec(baseAlgorithm));
@@ -625,7 +627,7 @@ public class HierarchalLvq extends AbstractClassifier
     list.add("-" + PARAMETERS[PARAM_HIT_PERCENTAGE]);
     list.add(Double.toString(hitPercentage));
 
-    return (String[]) list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
   protected String getClassifierSpec(Classifier c) {
@@ -665,7 +667,7 @@ public class HierarchalLvq extends AbstractClassifier
   }
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("Hierarchal version of the LVQ/SOM algorithm where per-bmu models are used in some cases. ");
     buffer.append("For those bmu's that perform poorly, a sub-model is created to handle all classification ");
@@ -679,7 +681,7 @@ public class HierarchalLvq extends AbstractClassifier
   }
 
   public String toString() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     if (super.m_Debug) {
       // bmu hits report

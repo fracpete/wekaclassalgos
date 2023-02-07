@@ -24,8 +24,10 @@ import weka.core.Option;
 import weka.core.Utils;
 import weka.core.WeightedInstancesHandler;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -123,7 +125,7 @@ public class MultipassLvq extends AbstractClassifier
   }
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(100);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("Learning Vector Quantisation - Multipass LVQ, where the same underlying model is tuned by two LVQ algorithms. ");
     buffer.append("The is the recommended usage for LVQ as described by Kohonoen. ");
     buffer.append("The same model is used, only it is constructed by passing through two ");
@@ -140,7 +142,7 @@ public class MultipassLvq extends AbstractClassifier
   public String toString() {
     // all stats are pulled about the model from the last pass (their all valid)
 
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     AlgorithmAncestor lastPass = (AlgorithmAncestor) algorithms[algorithms.length - 1];
 
     if (super.m_Debug) {
@@ -176,7 +178,7 @@ public class MultipassLvq extends AbstractClassifier
 
 
   public String prepareTrainingTimeReport() {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("-- Training Time Breakdown --\n");
     long total = 0;
     for (int i = 0; i < trainingTimes.length; i++) {
@@ -255,7 +257,7 @@ public class MultipassLvq extends AbstractClassifier
   }
 
   public String[] getOptions() {
-    LinkedList list = new LinkedList();
+    List<String> list = new ArrayList<String>();
 
     list.add("-" + PARAMETERS[PARAM_CLASSIFIER_1]);
     list.add(getClassifierSpec(algorithms[0]));
@@ -263,7 +265,7 @@ public class MultipassLvq extends AbstractClassifier
     list.add("-" + PARAMETERS[PARAM_CLASSIFIER_2]);
     list.add(getClassifierSpec(algorithms[1]));
 
-    return (String[]) list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
   protected String getClassifierSpec(Classifier c) {

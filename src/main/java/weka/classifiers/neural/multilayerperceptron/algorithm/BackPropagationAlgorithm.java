@@ -340,7 +340,7 @@ public class BackPropagationAlgorithm extends CommonNeuralAlgorithmAncestor
 
 
   public String getModelInformation() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     int count = 0;
 
     buffer.append("Momentum:         " + momentum + "\n");

@@ -25,13 +25,16 @@ import weka.classifiers.immune.airs.algorithm.AISModelClassifier;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
+import weka.core.OptionHelper;
 import weka.core.SelectedTag;
 import weka.core.Tag;
 import weka.core.UnsupportedClassTypeException;
-import weka.core.Utils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -229,7 +232,7 @@ public class AIRS2Parallel extends AbstractClassifier
 
 
   public String toString() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("AIRS2 Parallel - Parallel Artificial Immune Recognition System v2.0\n");
 
     if (trainingSummary != null) {
@@ -246,7 +249,7 @@ public class AIRS2Parallel extends AbstractClassifier
 
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append(toString());
     buffer.append("A parallel version of the AIRS algorithm. " +
       "Designed to run with multiple threads or on multiple machines.");
@@ -280,64 +283,28 @@ public class AIRS2Parallel extends AbstractClassifier
 
 
   public void setOptions(String[] options) throws Exception {
+    // long
+    setSeed(OptionHelper.getLong(PARAMETERS[0], options, 1));
+    // double
+    setAffinityThresholdScalar(OptionHelper.getDouble(PARAMETERS[1], options, 0.2));
+    setClonalRate(OptionHelper.getDouble(PARAMETERS[2], options, 10));
+    setHypermutationRate(OptionHelper.getDouble(PARAMETERS[3], options, 2.0));
+    setTotalResources(OptionHelper.getDouble(PARAMETERS[4], options, 150));
+    setStimulationValue(OptionHelper.getDouble(PARAMETERS[5], options, 0.9));
+    // int
+    setNumInstancesAffinityThreshold(OptionHelper.getInteger(PARAMETERS[6], options, -1));
+    setMemInitialPoolSize(OptionHelper.getInteger(PARAMETERS[7], options, 1));
+    setKnn(OptionHelper.getInteger(PARAMETERS[8], options, 3));
+
+    setNumThreads(OptionHelper.getInteger(PARAMETERS[9], options, 2));
+    mergeMode = OptionHelper.getInteger(PARAMETERS[10], options, 1);
     // parental option setting
     super.setOptions(options);
-    // long
-    setSeed(getLong(PARAMETERS[0], options));
-    // double
-    setAffinityThresholdScalar(getDouble(PARAMETERS[1], options));
-    setClonalRate(getDouble(PARAMETERS[2], options));
-    setHypermutationRate(getDouble(PARAMETERS[3], options));
-    setTotalResources(getDouble(PARAMETERS[4], options));
-    setStimulationValue(getDouble(PARAMETERS[5], options));
-    // int
-    setNumInstancesAffinityThreshold(getInteger(PARAMETERS[6], options));
-    setMemInitialPoolSize(getInteger(PARAMETERS[7], options));
-    setKnn(getInteger(PARAMETERS[8], options));
-
-    setNumThreads(getInteger(PARAMETERS[9], options));
-    mergeMode = getInteger(PARAMETERS[10], options);
-
-  }
-
-  protected double getDouble(String param, String[] options)
-    throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Double.parseDouble(value);
-  }
-
-  protected int getInteger(String param, String[] options)
-    throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Integer.parseInt(value);
-  }
-
-  protected long getLong(String param, String[] options)
-    throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Long.parseLong(value);
   }
 
 
   public String[] getOptions() {
-    LinkedList<String> list = new LinkedList<String>();
-
-    String[] options = super.getOptions();
-    for (int i = 0; i < options.length; i++) {
-      list.add(options[i]);
-    }
+    List<String> list = new ArrayList<String>(Arrays.asList(super.getOptions()));
 
     // long
     list.add("-" + PARAMETERS[0]);
@@ -365,7 +332,7 @@ public class AIRS2Parallel extends AbstractClassifier
     list.add("-" + PARAMETERS[10]);
     list.add(Integer.toString(mergeMode));
 
-    return list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
 

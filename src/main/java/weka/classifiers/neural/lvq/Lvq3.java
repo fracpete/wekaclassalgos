@@ -25,6 +25,7 @@ import weka.core.Utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Description: Implementation of the LVQ3 algorithm for use in WEKA
@@ -102,8 +103,8 @@ public class Lvq3 extends LvqAlgorithmAncestor {
    *
    * @return Collection
    */
-  protected Collection getListOptions() {
-    ArrayList list = new ArrayList(2);
+  protected Collection<Option> getListOptions() {
+    ArrayList<Option> list = new ArrayList<Option>();
 
     list.add(new Option("\t" + PARAM_WINDOW_SIZE_DESC, PARAM_WINDOW_SIZE, 1, "-" + PARAM_WINDOW_SIZE + " <window size>"));
     list.add(new Option("\t" + PARAM_EPSILON_DESC, PARAM_EPSILON, 1, "-" + PARAM_EPSILON + " <epsilon learning rate>"));
@@ -155,8 +156,8 @@ public class Lvq3 extends LvqAlgorithmAncestor {
    *
    * @return Collection
    */
-  protected Collection getAlgorithmOptions() {
-    ArrayList list = new ArrayList(4);
+  protected Collection<String> getAlgorithmOptions() {
+    List<String> list = new ArrayList<String>();
 
     list.add("-" + PARAM_WINDOW_SIZE);
     list.add(Double.toString(windowSize));
@@ -172,7 +173,7 @@ public class Lvq3 extends LvqAlgorithmAncestor {
    * @return String
    */
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(100);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("Learning Vector Quantisation (LVQ) - LVQ3.");
     buffer.append("The same as LVQ2.1, except only if the classes of the 2 BMUs match, ");
     buffer.append("otherwise, the a learning rate modified by the epsilon is used on both BMU's.");

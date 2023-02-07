@@ -25,9 +25,11 @@ import weka.core.Option;
 import weka.core.SelectedTag;
 import weka.core.Utils;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 
@@ -118,11 +120,11 @@ public abstract class LvqAlgorithmAncestor extends AlgorithmAncestor {
   }
 
 
-  protected abstract Collection getListOptions();
+  protected abstract Collection<Option> getListOptions();
 
   protected abstract void setArguments(String[] options) throws Exception;
 
-  protected abstract Collection getAlgorithmOptions();
+  protected abstract Collection<String> getAlgorithmOptions();
 
   protected abstract void validateArguments() throws Exception;
 
@@ -163,7 +165,7 @@ public abstract class LvqAlgorithmAncestor extends AlgorithmAncestor {
 
       list.add(new Option("\t" + PARAM_DESCRIPTIONS[i], PARAMETERS[i], 1, param));
     }
-    Collection c = getListOptions();
+    Collection<Option> c = getListOptions();
     if (c != null) {
       list.addAll(c);
     }
@@ -233,7 +235,7 @@ public abstract class LvqAlgorithmAncestor extends AlgorithmAncestor {
    * Returns a list of all common and specific algorithm options
    */
   public String[] getOptions() {
-    LinkedList list = new LinkedList();
+    List<String> list = new ArrayList<String>();
 
     list.add("-" + PARAMETERS[PARAM_INITIALISATION]);
     list.add(Integer.toString(initialisationMode));
@@ -256,12 +258,12 @@ public abstract class LvqAlgorithmAncestor extends AlgorithmAncestor {
     list.add("-" + PARAMETERS[PARAM_USE_VOTING]);
     list.add(Boolean.toString(useVoting));
 
-    Collection c = getAlgorithmOptions();
+    Collection<String> c = getAlgorithmOptions();
     if (c != null) {
       list.addAll(c);
     }
 
-    return (String[]) list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
   /**

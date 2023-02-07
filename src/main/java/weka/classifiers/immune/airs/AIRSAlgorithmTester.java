@@ -81,7 +81,7 @@ public abstract class AIRSAlgorithmTester {
       // standard deviation
       double stdev = stdev(results, mean);
       // print details
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder buffer = new StringBuilder();
       buffer.append(filenames[i] + ": ");
       buffer.append("Accuracy - " + Utils.format.format(mean) + "% (" + Utils.format.format(stdev) + ")");
       System.out.println(buffer.toString());

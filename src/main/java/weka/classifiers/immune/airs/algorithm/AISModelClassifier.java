@@ -65,7 +65,7 @@ public abstract class AISModelClassifier implements Serializable {
 
 
   public String getModelSummary(Instances aInstances) {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
 
     // data reduction percentage
     buffer.append(" - Classifier Statistics - \n");

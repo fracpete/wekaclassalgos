@@ -33,8 +33,10 @@ import weka.core.Option;
 import weka.core.SelectedTag;
 import weka.core.Utils;
 
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -317,7 +319,7 @@ public class Som extends AlgorithmAncestor {
   }
 
   public String[] getOptions() {
-    LinkedList list = new LinkedList();
+    List<String> list = new ArrayList<String>();
 
     list.add("-" + PARAMETERS[PARAM_MAP_WIDTH]);
     list.add("" + mapWidth);
@@ -344,12 +346,12 @@ public class Som extends AlgorithmAncestor {
     list.add("-" + PARAMETERS[PARAM_MAP_VOTING]);
     list.add("" + useVoting);
 
-    return (String[]) list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("Self Organising Map (SOM), aka Kohonen Feature Map. ");
     buffer.append("The SOM algorithm is not intended to be used for classification, ");

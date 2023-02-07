@@ -16,17 +16,18 @@
 package weka.classifiers.immune.clonalg;
 
 import weka.classifiers.AbstractClassifier;
-import weka.classifiers.Evaluation;
 import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.UnsupportedClassTypeException;
-import weka.core.Utils;
+import weka.core.OptionHelper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -144,13 +145,13 @@ public class CLONALG extends AbstractClassifier {
   }
 
   public String toString() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("CLONALG v1.0.\n");
     return buffer.toString();
   }
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append(toString());
     buffer.append("CLONALG - Clonal Selection Algorithm for classifiation.");
     buffer.append("\n\n");
@@ -186,53 +187,19 @@ public class CLONALG extends AbstractClassifier {
   }
 
   public void setOptions(String[] options) throws Exception {
+    setClonalFactor(OptionHelper.getDouble(PARAMETERS[0], options, 0.1));
+    setAntibodyPoolSize(OptionHelper.getInteger(PARAMETERS[1], options, 30));
+    setSelectionPoolSize(OptionHelper.getInteger(PARAMETERS[2], options, 20));
+    setTotalReplacement(OptionHelper.getInteger(PARAMETERS[3], options, 0));
+    setNumGenerations(OptionHelper.getInteger(PARAMETERS[4], options, 10));
+    setSeed(OptionHelper.getLong(PARAMETERS[5], options, 1));
+    setRemainderPoolRatio(OptionHelper.getDouble(PARAMETERS[6], options, 0.1));
     // parental option setting
     super.setOptions(options);
-
-    setClonalFactor(getDouble(PARAMETERS[0], options));
-    setAntibodyPoolSize(getInteger(PARAMETERS[1], options));
-    setSelectionPoolSize(getInteger(PARAMETERS[2], options));
-    setTotalReplacement(getInteger(PARAMETERS[3], options));
-    setNumGenerations(getInteger(PARAMETERS[4], options));
-    setSeed(getLong(PARAMETERS[5], options));
-    setRemainderPoolRatio(getDouble(PARAMETERS[6], options));
   }
-
-  protected double getDouble(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Double.parseDouble(value);
-  }
-
-  protected int getInteger(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Integer.parseInt(value);
-  }
-
-  protected long getLong(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Long.parseLong(value);
-  }
-
 
   public String[] getOptions() {
-    LinkedList<String> list = new LinkedList<String>();
-
-    String[] options = super.getOptions();
-    for (int i = 0; i < options.length; i++) {
-      list.add(options[i]);
-    }
+    List<String> list = new ArrayList<String>(Arrays.asList(super.getOptions()));
 
     list.add("-" + PARAMETERS[0]);
     list.add(Double.toString(clonalFactor));
@@ -249,7 +216,7 @@ public class CLONALG extends AbstractClassifier {
     list.add("-" + PARAMETERS[6]);
     list.add(Double.toString(remainderPoolRatio));
 
-    return list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
 

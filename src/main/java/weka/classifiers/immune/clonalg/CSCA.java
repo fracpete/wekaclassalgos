@@ -21,10 +21,13 @@ import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
 import weka.core.Option;
-import weka.core.Utils;
+import weka.core.OptionHelper;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -174,7 +177,7 @@ public class CSCA extends AbstractClassifier {
   }
 
   public String toString() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("Clonal Selection Classification Algorithm (CSCA) v1.0.\n");
 
     if (trainingSummary != null) {
@@ -186,7 +189,7 @@ public class CSCA extends AbstractClassifier {
   }
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append(toString());
     buffer.append("\n\n");
 
@@ -224,54 +227,21 @@ public class CSCA extends AbstractClassifier {
   }
 
 
-  protected double getDouble(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Double.parseDouble(value);
-  }
-
-  protected int getInteger(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Integer.parseInt(value);
-  }
-
-  protected long getLong(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Long.parseLong(value);
-  }
-
   public void setOptions(String[] options) throws Exception {
+    setInitialPopulationSize(OptionHelper.getInteger(PARAMETERS[0], options, 50));
+    setTotalGenerations(OptionHelper.getInteger(PARAMETERS[1], options, 5));
+    setSeed(OptionHelper.getLong(PARAMETERS[2], options, 1));
+    setClonalScaleFactor(OptionHelper.getDouble(PARAMETERS[3], options, 1.0));
+    setMinimumFitnessThreshold(OptionHelper.getDouble(PARAMETERS[4], options, 1.0));
+    setKNN(OptionHelper.getInteger(PARAMETERS[5], options, 1));
+    setNumPartitions(OptionHelper.getInteger(PARAMETERS[6], options, 1));
     // parental option setting
     super.setOptions(options);
-
-    setInitialPopulationSize(getInteger(PARAMETERS[0], options));
-    setTotalGenerations(getInteger(PARAMETERS[1], options));
-    setSeed(getLong(PARAMETERS[2], options));
-    setClonalScaleFactor(getDouble(PARAMETERS[3], options));
-    setMinimumFitnessThreshold(getDouble(PARAMETERS[4], options));
-    setKNN(getInteger(PARAMETERS[5], options));
-    setNumPartitions(getInteger(PARAMETERS[6], options));
   }
 
 
   public String[] getOptions() {
-    LinkedList<String> list = new LinkedList<String>();
-
-    String[] options = super.getOptions();
-    for (int i = 0; i < options.length; i++) {
-      list.add(options[i]);
-    }
+    List<String> list = new ArrayList<String>(Arrays.asList(super.getOptions()));
 
     list.add("-" + PARAMETERS[0]);
     list.add(Integer.toString(initialPopulationSize));
@@ -288,7 +258,7 @@ public class CSCA extends AbstractClassifier {
     list.add("-" + PARAMETERS[6]);
     list.add(Integer.toString(numPartitions));
 
-    return list.toArray(new String[list.size()]);
+    return list.toArray(new String[0]);
   }
 
 

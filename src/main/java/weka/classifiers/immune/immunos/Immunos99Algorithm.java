@@ -192,7 +192,7 @@ public class Immunos99Algorithm implements Serializable {
   }
 
   protected String getModelSummary(Instances aInstances) {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
 
     int total = 0;
     for (int i = 0; i < antibodyGroups.length; i++) {
@@ -216,7 +216,7 @@ public class Immunos99Algorithm implements Serializable {
   }
 
   protected String getTrainingSummary(Instances aInstances) {
-    StringBuffer b = new StringBuffer(1024);
+    StringBuilder b = new StringBuilder();
 
     if (debug) {
       b.append(" - Training Summary - \n");

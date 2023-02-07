@@ -240,7 +240,7 @@ public class AIRS2ParallelTrainer implements AISTrainer {
    * @return
    */
   public String getTrainingSummary() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append(" - Parallel Training Summary - \n");
     buffer.append("Total Partitions: " + numThreads);

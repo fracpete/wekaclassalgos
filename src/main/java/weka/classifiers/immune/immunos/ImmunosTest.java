@@ -92,7 +92,7 @@ public class ImmunosTest {
   }
 
   public static String arrayToString(double[] v) {
-    StringBuffer b = new StringBuffer();
+    StringBuilder b = new StringBuilder();
 
     for (int i = 0; i < v.length; i++) {
       b.append(format.format(v[i]) + "%");

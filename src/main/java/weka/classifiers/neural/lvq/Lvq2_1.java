@@ -25,6 +25,7 @@ import weka.core.Utils;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * Description: Implementation of the LVQ2.1 algorithm for use in WEKA.
@@ -84,8 +85,8 @@ public class Lvq2_1 extends LvqAlgorithmAncestor {
    *
    * @return Collection
    */
-  protected Collection getListOptions() {
-    ArrayList list = new ArrayList(1);
+  protected Collection<Option> getListOptions() {
+    ArrayList<Option> list = new ArrayList<Option>();
     list.add(new Option("\t" + PARAM_WINDOW_SIZE_DESC, PARAM_WINDOW_SIZE, 1, "-" + PARAM_WINDOW_SIZE + " <window sizes>"));
     return list;
   }
@@ -105,8 +106,8 @@ public class Lvq2_1 extends LvqAlgorithmAncestor {
    *
    * @return Collection
    */
-  protected Collection getAlgorithmOptions() {
-    ArrayList list = new ArrayList(2);
+  protected Collection<String> getAlgorithmOptions() {
+    List<String> list = new ArrayList<String>();
     list.add("-" + PARAM_WINDOW_SIZE);
     list.add(Double.toString(windowSize));
     return list;
@@ -118,7 +119,7 @@ public class Lvq2_1 extends LvqAlgorithmAncestor {
    * @return String
    */
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(100);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("Learning Vector Quantisation (LVQ) - LVQ2_1.");
     buffer.append("The top two BMU's (best matching units) are selected for a data vector. ");
     buffer.append("One of the BMU's class's must match the data vector, and the vectors ");

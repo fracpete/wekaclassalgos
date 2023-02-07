@@ -136,7 +136,7 @@ public class AIRS1Trainer implements AISTrainer {
   }
 
   public String getTrainingSummary() {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
     NumberFormat f = Utils.format;
 
     buffer.append(" - Training Summary - \n");

@@ -52,7 +52,7 @@ public class LearningKernelFactory {
   public final static String DESCRIPTION;
 
   static {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
     buffer.append("(");
 
     for (int i = 0; i < TAGS_LEARNING_FUNCTION.length; i++) {

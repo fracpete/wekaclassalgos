@@ -61,7 +61,7 @@ public class WidrowHoff extends Perceptron {
   }
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("Single Layer Perceptron : Perceptron Learning Rule, Binary inputs, Step transfer function");
 

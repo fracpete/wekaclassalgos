@@ -69,7 +69,7 @@ public class BoldDriverBackPropagationAlgorithm extends BackPropagationAlgorithm
 
 
   public String getModelInformation() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("Error Increase Adjustment: " + errorIncreaseAdjustment + "\n");
     buffer.append("Error Decrease Adjustment: " + errorDecreaseAdjustment + "\n");

@@ -20,14 +20,8 @@ import weka.core.Capabilities;
 import weka.core.Capabilities.Capability;
 import weka.core.Instance;
 import weka.core.Instances;
-import weka.core.Option;
-import weka.core.Utils;
 import weka.filters.Filter;
 import weka.filters.unsupervised.instance.Normalize;
-
-import java.util.Enumeration;
-import java.util.LinkedList;
-import java.util.Vector;
 
 /**
  * Type: Immunos<br>
@@ -102,13 +96,13 @@ public class Immunos1 extends AbstractClassifier {
   }
 
   public String toString() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("Immunos-1 v1.0.\n");
     return buffer.toString();
   }
 
   public String globalInfo() {
-    StringBuffer buffer = new StringBuffer(1000);
+    StringBuilder buffer = new StringBuilder();
     buffer.append(toString());
     buffer.append("\n\n");
 
@@ -123,64 +117,6 @@ public class Immunos1 extends AbstractClassifier {
       "Technical Report ID: 3-01. ");
 
     return buffer.toString();
-  }
-
-
-  public Enumeration listOptions() {
-    Vector<Option> list = new Vector<Option>(15);
-
-    // add parents options
-    Enumeration e = super.listOptions();
-    while (e.hasMoreElements()) {
-      list.add((Option) e.nextElement());
-    }
-
-    return list.elements();
-  }
-
-  public void setOptions(String[] options) throws Exception {
-    // parental option setting
-    super.setOptions(options);
-  }
-
-  protected double getDouble(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Double.parseDouble(value);
-  }
-
-  protected int getInteger(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Integer.parseInt(value);
-  }
-
-  protected long getLong(String param, String[] options) throws Exception {
-    String value = Utils.getOption(param.charAt(0), options);
-    if (value == null) {
-      throw new Exception("Parameter not provided: " + param);
-    }
-
-    return Long.parseLong(value);
-  }
-
-
-  public String[] getOptions() {
-    LinkedList<String> list = new LinkedList<String>();
-
-    String[] options = super.getOptions();
-
-    for (int i = 0; i < options.length; i++) {
-      list.add(options[i]);
-    }
-
-    return list.toArray(new String[list.size()]);
   }
 
 

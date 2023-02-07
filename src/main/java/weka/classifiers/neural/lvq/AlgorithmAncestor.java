@@ -278,7 +278,7 @@ public abstract class AlgorithmAncestor extends AbstractClassifier
    */
   public String prepareClassDistributionReport(String aHeader) {
     NumberFormat formatter = NumberFormat.getPercentInstance();
-    StringBuffer buffer = new StringBuffer(200);
+    StringBuilder buffer = new StringBuilder();
 
     // calculate distribution
     int[] distribution = model.calculateCodebookClassDistribution();
@@ -295,7 +295,7 @@ public abstract class AlgorithmAncestor extends AbstractClassifier
 
   public String prepareIndividualClassDistributionReport() {
     NumberFormat format = NumberFormat.getPercentInstance();
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("-- Individual BMU Class Distribution --\n");
     buffer.append("bmu,\t");
@@ -349,7 +349,7 @@ public abstract class AlgorithmAncestor extends AbstractClassifier
 
   public String prepareTrainingBMUReport() {
     NumberFormat format = NumberFormat.getPercentInstance();
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
     int totalUnused = 0;
 
     // produce a bmu hits report
@@ -390,7 +390,7 @@ public abstract class AlgorithmAncestor extends AbstractClassifier
   }
 
   public String prepareCodebookVectorReport() {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
 
     CodebookVector[] vectors = model.getCodebookVectors();
     buffer.append("-- Codebook Vectors (" + vectors.length + " in total) --\n");
@@ -405,7 +405,7 @@ public abstract class AlgorithmAncestor extends AbstractClassifier
   }
 
   public String prepareBuildTimeReport() {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("-- Training Time Breakdown --\n");
     buffer.append("Model Initialisation Time   : " + initialisationTime + "ms\n");
     buffer.append("Model Training Time         : " + trainingTime + "ms\n");
@@ -414,7 +414,7 @@ public abstract class AlgorithmAncestor extends AbstractClassifier
   }
 
   public String quantisationErrorReport() {
-    StringBuffer buffer = new StringBuffer(1024);
+    StringBuilder buffer = new StringBuilder();
     buffer.append("-- Training Quantisation Error Report --\n");
     buffer.append("Quantisation Error         : " + trainingQuantisationError + "\n");
     buffer.append("Average Quantisation Error : " + trainingAvgQuantisationError + "\n");
@@ -426,7 +426,7 @@ public abstract class AlgorithmAncestor extends AbstractClassifier
   }
 
   public String toString() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     if (super.m_Debug) {
       // bmu hits report

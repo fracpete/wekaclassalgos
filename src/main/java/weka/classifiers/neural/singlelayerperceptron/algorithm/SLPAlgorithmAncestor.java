@@ -111,7 +111,7 @@ public abstract class SLPAlgorithmAncestor extends CommonNeuralAlgorithmAncestor
 
 
   public String getModelInformation() {
-    StringBuffer buffer = new StringBuffer();
+    StringBuilder buffer = new StringBuilder();
 
     buffer.append("Initial Learing Rate     : " + learningRateFunction.getInitialLearningRate() + "\n");
     buffer.append("Bias Input Value         : " + neurons[0].getBiasInputValue() + "\n");
