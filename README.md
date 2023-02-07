@@ -44,6 +44,7 @@ Releases
 
 Click on one of the following links to download the corresponding Weka package:
 
+* [2023.2.8](https://github.com/fracpete/wekaclassalgos/releases/download/v2023.2.8/wekaclassalgos-2023.2.8.zip)
 * [2017.10.18](https://github.com/fracpete/wekaclassalgos/releases/download/v2017.10.18/wekaclassalgos-2017.10.18.zip)
 
 
@@ -69,7 +70,7 @@ Add the following dependency in your `pom.xml` to include the package:
     <dependency>
       <groupId>com.github.fracpete</groupId>
       <artifactId>wekaclassalgos</artifactId>
-      <version>2017.10.18</version>
+      <version>2023.2.8</version>
       <type>jar</type>
       <exclusions>
         <exclusion>
