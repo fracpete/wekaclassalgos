@@ -5,10 +5,10 @@
 PackageName=wekaclassalgos
 
 # Version (required)
-Version=2017.10.18
+Version=2023.2.8
 
 #Date (year-month-day)
-Date=2017-10-18
+Date=2023-02-08
 
 # Title (required)
 Title=Weka Classification Algorithms
@@ -29,7 +29,7 @@ License=GPL 3.0
 Description=A collection of plug-in algorithms for the WEKA machine learning workbench including artificial neural network (ANN) algorithms, and artificial immune system (AIS) algorithms.
 
 # Package URL for obtaining the package archive (required)
-PackageURL=https://github.com/fracpete/multisearch-weka-package/releases/download/v2017.10.18/multisearch-2017.10.18.zip
+PackageURL=https://github.com/fracpete/multisearch-weka-package/releases/download/v2023.2.8/multisearch-2023.2.8.zip
 
 # URL for further information
 URL=https://github.com/fracpete/wekaclassalgos
